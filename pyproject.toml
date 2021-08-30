@@ -1,0 +1,38 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Bregy Malpartida", email = "bregy@minsky.cc"},
+]
+dependencies = [
+    "numpy~=1.21",
+    "scipy~=1.6",
+    "matplotlib~=3.4",
+    "shapely~=1.7",
+    "Pillow~=8.3",
+]
+requires-python = ">=3.9"
+dynamic = ["classifiers"]
+license = {text = "MIT"}
+
+[project.urls]
+homepage = ""
+
+
+[project.optional-dependencies]
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "tk~=0.1",
+    "mypy~=0.910",
+]
+
+[tool.autopep8]
+max_line_length = 120
+

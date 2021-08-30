@@ -1,0 +1,5 @@
+.dccache
+.pdm.toml
+.vscode
+__pycache__
+__pypackages__
