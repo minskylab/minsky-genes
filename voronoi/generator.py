@@ -1,23 +1,23 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.spatial import Voronoi, voronoi_plot_2d
-
-# rng = np.random.default_rng()
-# points = rng.random((100, 2))
-
-# vor = Voronoi(points)
-
-# print(f"total vertices: {len(vor.vertices)}")
-# # for r in vor.regions:
-# #     print(r)
-
-# fig = voronoi_plot_2d(vor, show_points=False, show_vertices=False)
-# plt.savefig("output.png")
+from numpy import ndarray
+from numpy.random import default_rng
+from scipy.spatial import Voronoi
 
 
-def generate_voronoi(size: int, n_point: int) -> Voronoi:
-    rng = np.random.default_rng()
-    points = rng.random((n_point, 2))*size
+def uniform_random_points(n_point: int, amplitude: float) -> ndarray:
+    rng = default_rng()
+    points = rng.random((n_point, 2))*amplitude
+
+    return points
+
+
+def seeded_random_points(seed: int, n_point: int, amplitude: float) -> ndarray:
+    rng = default_rng(seed)
+    points = rng.random((n_point, 2))*amplitude
+
+    return points
+
+
+def generate_voronoi(points: ndarray) -> Voronoi:
     vor = Voronoi(points)
 
     return vor

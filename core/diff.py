@@ -1,11 +1,7 @@
-
-
 from typing import Literal
 
-from numpy import asarray, ndarray
+from numpy import asarray, max, mean, ndarray
 from PIL import Image
-
-from numpy import mean, max
 
 ImageCompareOperator = Literal["sub", "sqr_mean", "xor"]
 
