@@ -5,7 +5,7 @@ from numpy import ndarray, asarray
 from numpy.random import default_rng
 
 
-def best_individuals_of_population(population: Population, input_shape: ndarray, how: int, alpha: float = 0.05, beta: float = 0.9):
+def best_individuals_of_population(population: Population, input_shape: ndarray, how: int, alpha: float = 0.05, beta: float = 0.9) -> Population:
     fintenesses = asarray(calculate_population_fitness(population, input_shape, alpha, beta))
 
     return asarray(population)[fintenesses.argsort()[how:0:-1]]
@@ -32,8 +32,16 @@ def select_survivals(population: Population, input_shape: ndarray, alpha: float 
     return new_population
 
 
-def evolve_population(population: Population, input_shape: ndarray, alpha: float = 0.05, beta: float = 0.9):
+def survive_population(population: Population, input_shape: ndarray, alpha: float = 0.05, beta: float = 0.9) -> Population:
     population_fragment = select_survivals(population, input_shape, alpha, beta)
 
+    cream_of_cream = best_individuals_of_population(population, input_shape, 3, alpha, beta)
+
+    i: int = 0
+
     while len(population_fragment) < len(population):
-        population_fragment.append(population[len(population_fragment)])
+        individual = cream_of_cream[i % len(cream_of_cream)]
+        population_fragment.append(individual)
+        i += 1
+
+    return population_fragment
