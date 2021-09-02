@@ -8,7 +8,7 @@ from numpy.random import default_rng
 @dataclass
 class Genotype:
     points: ndarray
-    threshold: float
+    selected_points_threshold: int
 
 
 def mutate_genotype(genotype: Genotype, translate_points_percent: float = 0.1, threshold_mutate_ratio: float = 0.3) -> Genotype:
@@ -23,7 +23,9 @@ def mutate_genotype(genotype: Genotype, translate_points_percent: float = 0.1, t
     genotype.points[genotype.points > max_point] = max_point
     genotype.points[genotype.points < 0] = 0
 
-    genotype.threshold *= ((rng.random()*2)-1) * threshold_mutate_ratio
+    t_offset = genotype.selected_points_threshold * ((rng.random()*2)-1) * threshold_mutate_ratio
+
+    genotype.selected_points_threshold *= t_offset
 
     return genotype
 
@@ -40,8 +42,10 @@ def crossover_genotypes(genotype_a: Genotype, genotype_b: Genotype) -> Tuple[Gen
     points_2[points_2 < 0.5] = genotype_a.points[points_2 >= 0.5]
     points_2[points_2 >= 0.5] = genotype_b.points[points_2 < 0.5]
 
-    threshold_1 = rng.random() * (genotype_a.threshold - genotype_b.threshold) + genotype_b.threshold
-    threshold_2 = rng.random() * (genotype_a.threshold - genotype_b.threshold) + genotype_a.threshold
+    threshold_1 = rng.random() * (genotype_a.selected_points_threshold - genotype_b.selected_points_threshold) + \
+        genotype_b.selected_points_threshold
+    threshold_2 = rng.random() * (genotype_a.selected_points_threshold - genotype_b.selected_points_threshold) + \
+        genotype_a.selected_points_threshold
 
     child_1 = Genotype(points_1, threshold_1)
     child_2 = Genotype(points_2, threshold_2)

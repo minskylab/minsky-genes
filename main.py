@@ -1,5 +1,7 @@
-from core.diff import compare_two_images_from_memory
-from core.drawer import polygons_as_shape, save_polygons_as_image, save_voronoi_as_image, save_voronoi_with_selected_polygons_as_image
+from genetic.selection import best_individuals_of_population, select_survivals
+from genetic.population import calculate_population_fitness, new_random_population
+from genetic.phenotype import genotype_to_phenotype
+from genetic.genotype import Genotype
 from typing import List, Optional
 
 from matplotlib.pyplot import hist, savefig
@@ -10,40 +12,33 @@ from core.calculator import polygons_overlapped
 from shape.image import get_processed_input_shape
 from voronoi.generator import generate_voronoi, uniform_random_points
 
+from numpy.random import default_rng
+from numpy import max, ndarray, min
 
-input_shape = get_processed_input_shape("assets/minsky_low_small.png")
+from tqdm import trange
+
+input_shape: ndarray = get_processed_input_shape("assets/minsky_low_small.png")
 input_shape = input_shape[0:-1, 0:-1]
 
 
-diffs: List[float] = []
+rng = default_rng()
 
-best_polygons: List[Polygon] = []
-best_voronoi: Optional[Voronoi] = None
+m_points = 30
+n_individuals = 20
 
-min_diff = 1.0
+alpha = 0.6
+beta = 0.9
 
-for i in range(1000):
-    points = uniform_random_points(input_shape.shape[0], 40)
-    voronoi_diagram = generate_voronoi(points)
+total_crossvers = 10
+total_iterations = 100
 
-    selected_polygons = polygons_overlapped(voronoi_diagram, input_shape)
-    result_shape = polygons_as_shape(input_shape.shape, selected_polygons)
+pop = new_random_population(n_individuals, m_points, input_shape)
+print(calculate_population_fitness(pop, input_shape, alpha, beta))
+# print(pop)
 
-    diff = compare_two_images_from_memory(input_shape, result_shape, operator="sqr_mean")
+bests = best_individuals_of_population(pop, input_shape, 10, alpha, beta)
+print(calculate_population_fitness(bests, input_shape, alpha, beta))
+# print(bests)
 
-    diffs.append(diff)
-
-    if diff < min_diff:
-        best_polygons = selected_polygons
-        best_voronoi = voronoi_diagram
-        min_diff = diff
-
-
-print(diffs)
-print(min_diff)
-
-hist(diffs)
-savefig("errors_hist.png")
-
-save_polygons_as_image(input_shape.shape, best_polygons)
-save_voronoi_with_selected_polygons_as_image(best_voronoi, best_polygons)
+# new_pop = select_survivals(pop, input_shape, alpha, beta)
+# print(len(new_pop))

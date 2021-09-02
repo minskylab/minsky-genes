@@ -10,7 +10,7 @@ from core.calculator import polygons_overlapped
 
 def genotype_to_phenotype(genotype: Genotype, input_shape: ndarray) -> float:
     voronoi_diagram = generate_voronoi(genotype.points)
-    selected_polygons = polygons_overlapped(voronoi_diagram, input_shape, points_threshold=int(genotype.threshold))
+    selected_polygons = polygons_overlapped(voronoi_diagram, input_shape, int(genotype.selected_points_threshold))
 
     result_shape = polygons_as_shape(input_shape.shape, selected_polygons)
 

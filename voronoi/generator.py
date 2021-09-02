@@ -3,16 +3,16 @@ from numpy.random import default_rng
 from scipy.spatial import Voronoi
 
 
-def uniform_random_points(n_point: int, amplitude: float) -> ndarray:
+def uniform_random_points(n_points: int, amplitude: float) -> ndarray:
     rng = default_rng()
-    points = rng.random((n_point, 2))*amplitude
+    points = rng.random((n_points, 2))*amplitude
 
     return points
 
 
-def seeded_random_points(seed: int, n_point: int, amplitude: float) -> ndarray:
+def seeded_random_points(seed: int, n_points: int, amplitude: float) -> ndarray:
     rng = default_rng(seed)
-    points = rng.random((n_point, 2))*amplitude
+    points = rng.random((n_points, 2))*amplitude
 
     return points
 
