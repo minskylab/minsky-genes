@@ -46,7 +46,9 @@ def polygons_as_image(size: Tuple[int, int], polygons: List[Polygon]) -> Image:
     draw.rectangle(rect, fill=(255, 255, 255))
 
     for polygon in polygons:
-        draw.polygon(list(map(tuple, polygon.exterior.coords)), fill=(0, 0, 0))
+        coords = list(map(tuple, polygon.exterior.coords))
+        # print(coords)
+        draw.polygon(coords, fill=(0, 0, 0))
 
     return image
 

@@ -13,16 +13,16 @@ def polygons_overlapped(voronoi_diagram: Voronoi, input_shape: ndarray, points_t
 
     for region in voronoi_diagram.regions:
         if -1 not in region:
-            reg = map(tuple, voronoi_diagram.vertices[region])
-            valid_regions.append(Polygon(reg))
+            region = map(tuple, voronoi_diagram.vertices[region])
+            valid_regions.append(Polygon(region))
 
     points_inside: List[int] = [0] * len(valid_regions)
 
     for i in arange(input_shape.shape[0]):
         for j in arange(input_shape.shape[1]):
             if input_shape[j, i] < 255:
-                for n, reg in enumerate(valid_regions):
-                    if reg.contains(Point(i, j)):
+                for n, region in enumerate(valid_regions):
+                    if region.contains(Point(i, j)):
                         points_inside[n] += 1
 
     selected_polygons: List[Polygon] = []

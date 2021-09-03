@@ -1,4 +1,5 @@
-from numpy import ndarray
+from genetic.evolve import evolve_population
+from numpy import ndarray, mean
 from numpy.random import default_rng
 
 from genetic.population import calculate_population_fitness, new_random_population
@@ -18,17 +19,34 @@ alpha = 0.6
 beta = 0.9
 
 total_crossvers = 10
+mutation_probability = 0.01
 total_iterations = 100
 
+translate_points_percent = 0.1
+threshold_mutate_ratio = 0.3
+
 pop = new_random_population(n_individuals, m_points, input_shape)
-print(calculate_population_fitness(pop, input_shape, alpha, beta))
+# print(calculate_population_fitness(pop, input_shape, alpha, beta))
 # print(pop)
 
 bests = best_individuals_of_population(pop, input_shape, 10, alpha, beta)
-print(calculate_population_fitness(bests, input_shape, alpha, beta))
+# print(calculate_population_fitness(bests, input_shape, alpha, beta))
 # print(bests)
 
 new_pop = survive_population(pop, input_shape, alpha, beta)
+
+fitness = calculate_population_fitness(new_pop, input_shape, alpha, beta)
+print(mean(fitness))
+
+new_pop = evolve_population(new_pop, input_shape, alpha, beta,
+                            total_crossvers, mutation_probability,
+                            translate_points_percent, threshold_mutate_ratio)
+
+# print(new_pop)
+fitness = calculate_population_fitness(new_pop, input_shape, alpha, beta)
+print(mean(fitness))
+
+# print()
 
 # new_pop = select_survivals(pop, input_shape, alpha, beta)
 # print(len(new_pop))
