@@ -50,7 +50,7 @@ def crossover_genotypes(genotype_a: Genotype, genotype_b: Genotype) -> Tuple[Gen
     threshold_2 = rng.random() * (genotype_a.selected_points_threshold - genotype_b.selected_points_threshold) + \
         genotype_a.selected_points_threshold
 
-    print(len(points_1), len(points_2))
+    # print([len(p) for p in points_1], [len(p) for p in points_2])
 
     child_1 = Genotype(points_1, threshold_1)
     child_2 = Genotype(points_2, threshold_2)

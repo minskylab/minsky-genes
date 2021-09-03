@@ -47,7 +47,12 @@ def polygons_as_image(size: Tuple[int, int], polygons: List[Polygon]) -> Image:
 
     for polygon in polygons:
         coords = list(map(tuple, polygon.exterior.coords))
-        # print(coords)
+        # print(f"coords: {len(coords)}")
+
+        if len(coords) < 1:
+            # print(polygon)
+            continue
+
         draw.polygon(coords, fill=(0, 0, 0))
 
     return image
