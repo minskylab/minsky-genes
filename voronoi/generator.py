@@ -17,7 +17,7 @@ def seeded_random_points(seed: int, n_points: int, amplitude: float) -> ndarray:
     return points
 
 
-def generate_voronoi(points: ndarray) -> Voronoi:
+def generate_voronoi_from_points(points: ndarray) -> Voronoi:
     vor = Voronoi(points)
 
     return vor

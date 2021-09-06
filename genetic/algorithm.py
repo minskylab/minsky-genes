@@ -1,3 +1,4 @@
+from core.diff import open_image
 from dataclasses import dataclass
 from typing import List
 from numpy import concatenate, ndarray
@@ -6,12 +7,7 @@ from scipy.spatial import Voronoi
 from shapely.geometry.polygon import Polygon
 
 from genetic.genotype import Genotype
-from genetic.population import Population, calculate_population_fitness
-
-
-# class Individual:
-#     genotype: Genotype
-#     fitness
+from genetic.population import Fitness, Phenotype, Population, calculate_population_fitness, calculate_population_metrics
 
 
 @dataclass
@@ -47,13 +43,29 @@ class GeneticAlgorithmContext:
     populations: List[ContextualizedPopulation]
 
 
-def inflate_population(population: Population, params: Metaparameters) -> ContextualizedPopulation:
+def inflate_population(meta: Metaparameters, population: Population) -> ContextualizedPopulation:
     points: ndarray = concatenate([pop.points for pop in population], axis=0)
 
-    fitnesses = calculate_population_fitness(population, params.input_shape, params.alpha, params.beta)
+    metrics = calculate_population_metrics(meta, population)
+
+    phenotypes: List[Phenotype] = [0.0 for _ in range(meta.n_individuals)]
+    fitnesses: List[Fitness] = [0.0 for _ in range(meta.n_individuals)]
+    voronois: List[Voronoi] = [Voronoi() for _ in range(meta.n_individuals)]
+    polygons: List[List[Polygon]] = [[] for _ in range(meta.n_individuals)]
+
+    for i, (voronoi, polygons, phenotype, fitness) in enumerate(metrics):
+        phenotypes[i] = phenotype
+        fitnesses[i] = fitness
+        voronois[i] = voronoi
+        polygons[i] = polygons
+
+    # fitnesses = calculate_population_fitness(population, meta.input_shape, meta.alpha, meta.beta)
 
     return ContextualizedPopulation(
         population=population,
-        hash=hash(points.data),
         fitnesses=fitnesses,
-        polygons=)
+        voronoi=voronois,
+        polygons=polygons,
+        hash=hash(points.data),
+        # polygons=
+    )
