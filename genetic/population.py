@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 from numpy import max, min, ndarray
 from numpy.random import Generator, default_rng
@@ -37,6 +37,10 @@ def calculate_population_phenotypes(population: Population, input_shape: ndarray
             phenotypes[i] = genotype_to_phenotype(population[i], input_shape)
 
     return phenotypes
+
+
+# def calculate_population_metrics(population: Population, input_shape: ndarray) -> Tuple[]:
+#     pass
 
 
 def calculate_population_fitness(population: Population, input_shape: ndarray, alpha: float = 0.05, beta: float = 0.9) -> List[float]:

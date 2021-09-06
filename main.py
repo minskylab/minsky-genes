@@ -16,10 +16,10 @@ m_points = 30
 n_individuals = 20
 total_iterations = 100
 
-alpha = 0.6
+alpha = 0.4
 beta = 0.9
 
-total_crossvers = 10
+total_crossvers = 4
 mutation_probability = 0.01
 
 translate_points_percent = 0.1
