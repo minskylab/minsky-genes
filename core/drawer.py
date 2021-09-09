@@ -22,7 +22,7 @@ def save_voronoi_as_image(voronoi_diagram: Voronoi, image_path: str = "voronoi.p
 
 
 def save_voronoi_with_selected_polygons_as_image(voronoi_diagram: Voronoi, polygons: List[Polygon], image_path: str = "filled_voronoi.png"):
-    voronoi_plot_2d(voronoi_diagram, show_points=False, show_vertices=False)
+    voronoi_plot_2d(voronoi_diagram, show_points=True, show_vertices=False)
 
     for polygon in polygons:
         polygon_x: List[float] = []

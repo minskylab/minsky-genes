@@ -66,7 +66,7 @@ def calculate_population_metrics(meta: Metaparameters, population: Population) -
     weak_individual = 1 - max(phenotypes)
     better_individual = 1 - min(phenotypes)
 
-    for i in trange(n_individuals):
+    for i in range(n_individuals):
         prob_to_survive = 1 - phenotypes[i]
         prob_to_survive = map_float(prob_to_survive, weak_individual, better_individual, meta.alpha, meta.beta)
 

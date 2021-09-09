@@ -62,7 +62,7 @@ def evolve_contextualized_population(ga: GeneticAlgorithmContext) -> GeneticAlgo
         population_fragment.append(individual)
         j += 1
 
-    for _ in trange(ga.meta.total_crossvers):
+    for _ in range(ga.meta.total_crossvers):
         idx_1 = int(rng.random() * len(population_fragment))
         idx_2 = int(rng.random() * len(population_fragment))
 

@@ -13,81 +13,42 @@ input_shape: ndarray = get_processed_input_shape("assets/minsky_low_small.png")
 input_shape = input_shape[0:-1, 0:-1]
 
 
-# rng = default_rng()
-
-# m_points = 30
-# n_individuals = 20
-# total_iterations = 100
-
-# alpha = 0.4
-# beta = 0.9
-
-# total_crossvers = 4
-# mutation_probability = 0.01
-
-# translate_points_percent = 0.1
-# threshold_mutate_ratio = 0.3
-
-
 meta = Metaparameters(
     input_shape=input_shape,
 
-    n_individuals=50,
-    m_points=30,
+    n_individuals=500,
+    m_points=40,
     total_iterations=100,
 
-    total_crossvers=20,
-    mutation_probability=0.1,
+    total_crossvers=50,
+    mutation_probability=0.05,
 
-    alpha=0.4,
+    alpha=0.2,
     beta=0.9,
 
     translate_points_percent=0.4,
     threshold_mutate_ratio=0.3,
 
-    elite_ranking=20
+    elite_ranking=50
 )
 
 
 ga = new_genetic_algorithm(meta)
-# pop = new_random_population(n_individuals, m_points, input_shape)
-# print(calculate_population_fitness(pop, input_shape, alpha, beta))
-# print(pop)
-
-
-# bests = best_individuals_of_population(pop, input_shape, 10, alpha, beta)
-# print(calculate_population_fitness(bests, input_shape, alpha, beta))
-# print(bests)
 
 
 for i in range(meta.total_iterations):
     ga = evolve_contextualized_population(ga)
-    # new_pop = survive_population(pop, input_shape, alpha, beta)
 
-    # # fitness = calculate_population_fitness(new_pop, input_shape, alpha, beta)
-    # # print(mean(fitness))
+    best_individual_index = argmax(ga.populations[-1].fitnesses)
 
-    # new_pop = evolve_population(new_pop, input_shape, alpha, beta,
-    #                             total_crossvers, mutation_probability,
-    #                             translate_points_percent, threshold_mutate_ratio)
-
-    # # print(new_pop)
-    # fitness = calculate_population_fitness(new_pop, input_shape, alpha, beta)
-    best_ind_index = argmax(ga.populations[-1].fitnesses)
-
-    best_threshold = [gen.selected_points_threshold for gen in ga.populations[-1].population][best_ind_index]
-    best_phenotype = ga.populations[-1].phenotypes[best_ind_index]
-    best_voronoi = ga.populations[-1].voronoi[best_ind_index]
-    best_polygons = ga.populations[-1].polygons[best_ind_index]
+    best_genotype = ga.populations[-1].population[best_individual_index]
+    best_threshold = ga.populations[-1].population[best_individual_index].selected_points_threshold
+    best_phenotype = ga.populations[-1].phenotypes[best_individual_index]
+    best_voronoi = ga.populations[-1].voronoi[best_individual_index]
+    best_polygons = ga.populations[-1].polygons[best_individual_index]
 
     image_name = f"vor-{i}-{best_phenotype:.3f}-{best_threshold}.png"
 
     save_voronoi_with_selected_polygons_as_image(best_voronoi, best_polygons, image_name)
 
-    print(f"[generation {len(ga.populations)-1}] | mean fitness: {mean(ga.populations[-1].fitnesses)} | min phenotype: {min(ga.populations[-1].phenotypes)}")
-
-# print()
-
-# new_pop = select_survivals(pop, input_shape, alpha, beta)
-# print(len(new_pop))
-# print(calculate_population_fitness(new_pop, input_shape, alpha, beta))
+    print(f"[generation {len(ga.populations)-1}] | best total points: {len(best_genotype.points)} |mean fitness: {mean(ga.populations[-1].fitnesses)} | min phenotype: {min(ga.populations[-1].phenotypes)}")

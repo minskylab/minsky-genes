@@ -25,7 +25,10 @@ def mutate_genotype(genotype: Genotype, translate_points_percent: float = 0.1, t
 
     t_offset = genotype.selected_points_threshold * ((rng.random()*2)-1) * threshold_mutate_ratio
 
-    genotype.selected_points_threshold += ceil(t_offset)
+    genotype.selected_points_threshold += int(t_offset)
+
+    if genotype.selected_points_threshold < 0:
+        genotype.selected_points_threshold = 1
 
     return genotype
 
@@ -45,10 +48,13 @@ def crossover_genotypes(genotype_a: Genotype, genotype_b: Genotype) -> Tuple[Gen
     points_2[aux_points_2 < 0.5] = genotype_a.points[aux_points_2 < 0.5]
     points_2[aux_points_2 >= 0.5] = genotype_b.points[aux_points_2 >= 0.5]
 
-    threshold_1 = rng.random() * (genotype_a.selected_points_threshold - genotype_b.selected_points_threshold) + \
-        genotype_b.selected_points_threshold
-    threshold_2 = rng.random() * (genotype_a.selected_points_threshold - genotype_b.selected_points_threshold) + \
-        genotype_a.selected_points_threshold
+    # threshold_1 = rng.random() * (genotype_a.selected_points_threshold - genotype_b.selected_points_threshold) + \
+    #     genotype_b.selected_points_threshold
+    # threshold_2 = rng.random() * (genotype_a.selected_points_threshold - genotype_b.selected_points_threshold) + \
+    #     genotype_a.selected_points_threshold
+
+    threshold_1 = (genotype_a.selected_points_threshold + genotype_b.selected_points_threshold)//2
+    threshold_2 = (genotype_a.selected_points_threshold + genotype_b.selected_points_threshold)//2
 
     # print([len(p) for p in points_1], [len(p) for p in points_2])
 
