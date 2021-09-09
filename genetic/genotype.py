@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Tuple
 
-from numpy import max, ndarray
+from numpy import ceil, max, ndarray
 from numpy.random import default_rng
 
 
@@ -25,7 +25,7 @@ def mutate_genotype(genotype: Genotype, translate_points_percent: float = 0.1, t
 
     t_offset = genotype.selected_points_threshold * ((rng.random()*2)-1) * threshold_mutate_ratio
 
-    genotype.selected_points_threshold += t_offset
+    genotype.selected_points_threshold += ceil(t_offset)
 
     return genotype
 

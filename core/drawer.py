@@ -13,7 +13,7 @@ from shapely.geometry.polygon import Polygon
 
 from core.calculator import polygons_overlapped
 from shape.image import get_image_array, get_processed_input_shape
-from voronoi.generator import generate_voronoi
+from voronoi.generator import generate_voronoi_from_points
 
 
 def save_voronoi_as_image(voronoi_diagram: Voronoi, image_path: str = "voronoi.png"):

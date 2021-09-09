@@ -1,5 +1,4 @@
-from genetic.algorithm import Metaparameters
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 from core.calculator import polygons_overlapped
 from numpy import max, min, ndarray
@@ -10,7 +9,7 @@ from tqdm import trange
 from voronoi.generator import generate_voronoi_from_points, uniform_random_points
 
 from genetic.genotype import Genotype
-from genetic.individual import Individual
+from genetic.meta import Metaparameters
 from genetic.phenotype import calculate_phenotype, genotype_to_phenotype
 from genetic.utils import map_float
 
@@ -46,12 +45,13 @@ def calculate_population_phenotypes(population: Population, input_shape: ndarray
     return phenotypes
 
 
-def calculate_population_metrics(meta: Metaparameters, population: Population) -> List[Tuple[Voronoi, List[Polygon], Phenotype, Fitness]]:
+# def calculate_population_metrics(meta: Metaparameters, population: Population) -> List[Tuple[Voronoi, List[Polygon], Phenotype, Fitness]]:
+def calculate_population_metrics(meta: Metaparameters, population: Population) -> Tuple[List[Optional[Voronoi]], List[List[Polygon]], List[Phenotype], List[Fitness]]:
     n_individuals = len(population)
 
     phenotypes: List[Phenotype] = [0.0 for _ in range(n_individuals)]
     fitnesses: List[Fitness] = [0.0 for _ in range(n_individuals)]
-    voronois: List[Voronoi] = [Voronoi() for _ in range(n_individuals)]
+    voronois: List[Optional[Voronoi]] = [None for _ in range(n_individuals)]
     polygons: List[Polygon] = [[] for _ in range(n_individuals)]
 
     for i in trange(n_individuals):
@@ -71,6 +71,8 @@ def calculate_population_metrics(meta: Metaparameters, population: Population) -
         prob_to_survive = map_float(prob_to_survive, weak_individual, better_individual, meta.alpha, meta.beta)
 
         fitnesses[i] = prob_to_survive
+
+    return voronois, polygons, phenotypes, fitnesses
 
 
 def calculate_population_fitness(population: Population, input_shape: ndarray, alpha: float = 0.05, beta: float = 0.9) -> List[Fitness]:
