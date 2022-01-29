@@ -37,7 +37,7 @@ def save_voronoi_with_selected_polygons_as_image(voronoi_diagram: Voronoi, polyg
     savefig(image_path)
 
 
-def polygons_as_image(size: Tuple[int, int], polygons: List[Polygon]) -> Image:
+def polygons_as_image(size: Tuple[int, int], polygons: List[Polygon], resize_polygons: bool = False) -> Image:
     image = Image.new('RGB', size)
 
     draw = ImageDraw.Draw(image)
@@ -46,14 +46,25 @@ def polygons_as_image(size: Tuple[int, int], polygons: List[Polygon]) -> Image:
     draw.rectangle(rect, fill=(255, 255, 255))
 
     for polygon in polygons:
-        coords = list(map(tuple, polygon.exterior.coords))
-        # print(f"coords: {len(coords)}")
+        size_x = polygon.bounds[3] - polygon.bounds[0]
+        size_y = polygon.bounds[2] - polygon.bounds[1]
 
-        if len(coords) < 1:
-            # print(polygon)
-            continue
+        # f_x = size[0] / size_x
+        # f_y = size[1] / size_y
 
-        draw.polygon(coords, fill=(0, 0, 0))
+        # coords = list(map(tuple, polygon.exterior.coords))
+        # coords = [(p[0] * f_x if resize_polygons else 1, p[1] * f_y if resize_polygons else 1)
+        #           for p in coord in map(tuple, polygon.exterior.coords)]
+
+        # coords = [p for p in coord for coord in map(tuple, polygon.exterior.coords)]
+
+       # print(f"coords: {len(coords)}")
+
+    #    if len(coords) < 1:
+    #         # print(polygon)
+    #         continue
+
+    #     draw.polygon(coords, fill=(0, 0, 0))
 
     return image
 
@@ -67,7 +78,7 @@ def polygons_as_shape(size: Tuple[int, int], polygons: List[Polygon]) -> ndarray
     return grayscale_image
 
 
-def save_polygons_as_image(size: Tuple[int, int], polygons: List[Polygon], image_path: str = "polygons.png"):
-    image = polygons_as_image(size, polygons)
+def save_polygons_as_image(size: Tuple[int, int], polygons: List[Polygon], image_path: str = "polygons.png", resize_polygons: bool = False):
+    image = polygons_as_image(size, polygons, resize_polygons)
 
     image.save(image_path)
