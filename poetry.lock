@@ -18,14 +18,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "astor"
-version = "0.8.1"
-description = "Read/rewrite/write Python ASTs"
-category = "main"
-optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
-
-[[package]]
 name = "asttokens"
 version = "2.0.5"
 description = "Annotate AST trees with source code positions"
@@ -160,17 +152,6 @@ description = "Decorators for Humans"
 category = "dev"
 optional = false
 python-versions = ">=3.5"
-
-[[package]]
-name = "dill"
-version = "0.3.4"
-description = "serialize all of python"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*"
-
-[package.extras]
-graph = ["objgraph (>=1.7.2)"]
 
 [[package]]
 name = "entrypoints"
@@ -891,17 +872,6 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
-name = "sourceinspect"
-version = "0.0.4"
-description = "A unified inspector for retriving source from Python objects"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-dill = "*"
-
-[[package]]
 name = "stack-data"
 version = "0.1.4"
 description = "Extract data from python stack frames and tracebacks for informative displays"
@@ -916,20 +886,6 @@ pure-eval = "*"
 
 [package.extras]
 tests = ["pytest", "typeguard", "pygments", "littleutils"]
-
-[[package]]
-name = "taichi"
-version = "0.8.11"
-description = "The Taichi Programming Language"
-category = "main"
-optional = false
-python-versions = ">=3.6,<3.10"
-
-[package.dependencies]
-astor = "*"
-colorama = "*"
-numpy = "*"
-sourceinspect = ">=0.0.4"
 
 [[package]]
 name = "tensorboard"
@@ -1135,7 +1091,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9"
-content-hash = "fad6633f33a97ad98f6f04c01c9ef844fb4f8fd98a5408741c0b670e1244a795"
+content-hash = "d25db2790f10a1b6e006a74b354ffc3d46600b06b89c565a4c805f2d48014f83"
 
 [metadata.files]
 absl-py = [
@@ -1145,10 +1101,6 @@ absl-py = [
 appnope = [
     {file = "appnope-0.1.2-py2.py3-none-any.whl", hash = "sha256:93aa393e9d6c54c5cd570ccadd8edad61ea0c4b9ea7a01409020c9aa019eb442"},
     {file = "appnope-0.1.2.tar.gz", hash = "sha256:dd83cd4b5b460958838f6eb3000c660b1f9caf2a5b1de4264e941512f603258a"},
-]
-astor = [
-    {file = "astor-0.8.1-py2.py3-none-any.whl", hash = "sha256:070a54e890cefb5b3739d19f30f5a5ec840ffc9c50ffa7d23cc9fc1a38ebbfc5"},
-    {file = "astor-0.8.1.tar.gz", hash = "sha256:6a6effda93f4e1ce9f618779b2dd1d9d84f1e32812c23a29b3fff6fd7f63fa5e"},
 ]
 asttokens = [
     {file = "asttokens-2.0.5-py2.py3-none-any.whl", hash = "sha256:0844691e88552595a6f4a4281a9f7f79b8dd45ca4ccea82e5e05b4bbdb76705c"},
@@ -1289,10 +1241,6 @@ debugpy = [
 decorator = [
     {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
     {file = "decorator-5.1.1.tar.gz", hash = "sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330"},
-]
-dill = [
-    {file = "dill-0.3.4-py2.py3-none-any.whl", hash = "sha256:7e40e4a70304fd9ceab3535d36e58791d9c4a776b38ec7f7ec9afc8d3dca4d4f"},
-    {file = "dill-0.3.4.zip", hash = "sha256:9f9734205146b2b353ab3fec9af0070237b6ddae78452af83d2fca84d739e675"},
 ]
 entrypoints = [
     {file = "entrypoints-0.4-py3-none-any.whl", hash = "sha256:f174b5ff827504fd3cd97cc3f8649f3693f51538c7e4bdf3ef002c8429d42f9f"},
@@ -1899,32 +1847,9 @@ six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
-sourceinspect = [
-    {file = "sourceinspect-0.0.4-py3-none-any.whl", hash = "sha256:a33fabe25dfced4ed949ceb3312824579456a1faa0ae85b6a78887775c4bb4b9"},
-]
 stack-data = [
     {file = "stack_data-0.1.4-py3-none-any.whl", hash = "sha256:02cc0683cbc445ae4ca8c4e3a0e58cb1df59f252efb0aa016b34804a707cf9bc"},
     {file = "stack_data-0.1.4.tar.gz", hash = "sha256:7769ed2482ce0030e00175dd1bf4ef1e873603b6ab61cd3da443b410e64e9477"},
-]
-taichi = [
-    {file = "taichi-0.8.11-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:384f9c5b53d0726df9e0b470c9509c8d5a20245e8a986516cd40e9e3ab701c41"},
-    {file = "taichi-0.8.11-cp36-cp36m-macosx_10_15_x86_64.whl", hash = "sha256:eb22c0b9569ec9d294b55f65c821df836eb813abd5abd7a3fd140e1020b7d97e"},
-    {file = "taichi-0.8.11-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:9be6fc237715799b0cf180b4274de6b94b328e0ee28d201319693d679e8dfc7a"},
-    {file = "taichi-0.8.11-cp36-cp36m-win_amd64.whl", hash = "sha256:daf7d4f5b39d589f8055680e16166876bfea3f04c0ed54121b87b0f644adb662"},
-    {file = "taichi-0.8.11-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:645848f06cc28e9742e09d19f96bfaf3e36b2cc192cf0357f84402f10dbd6008"},
-    {file = "taichi-0.8.11-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:5ed1c311434422b1bc74cfcd1a145050b1aa04ab7e7eb220a1780a7db0887cd9"},
-    {file = "taichi-0.8.11-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:a95728eb99776b7629816ba0c08cb767e056e89fcd2f26e3bad3d07842f802d8"},
-    {file = "taichi-0.8.11-cp37-cp37m-win_amd64.whl", hash = "sha256:255fb734c80f1862c9c0daf85466ceaccf6798970e634a1ec56e86e6b5987361"},
-    {file = "taichi-0.8.11-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:034f53c8c0ef6c1ad313318d94c29aee03f11faf4cc638cdcd43650b90cd3f6e"},
-    {file = "taichi-0.8.11-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:22d621e9330414e52de32d1ab0bc6b80eddcbf47d1fc3f15370bc36dc0e9dfbb"},
-    {file = "taichi-0.8.11-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:6008ef4d1efd1c68bd63817c02e3ec9c772d0f0e1cee51bc491f73c2cba70f21"},
-    {file = "taichi-0.8.11-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:b5cbf0d9463acfeb7b2ae2c68ff2a98cfb4bc50e92d67c02612ea40a9382b362"},
-    {file = "taichi-0.8.11-cp38-cp38-win_amd64.whl", hash = "sha256:12a6ff2265817e9bce29c6cc518fb2a1d9b931a6d9c82981c45e92956eedcbad"},
-    {file = "taichi-0.8.11-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:79c34ea44432ffa4241130fbf594ffd12b3474a74412cf37f81991335b01ae9a"},
-    {file = "taichi-0.8.11-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:b0f89e44ae39d235ced51041650e916fcd3fde225fa9bfcc773b0de9535ed407"},
-    {file = "taichi-0.8.11-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:cde1c33dc8728174398544a1a04d97efc4426496f94f613d6b72127ed6eeb425"},
-    {file = "taichi-0.8.11-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:8d89e5c2a65a849d83cd1586c4230570f791fb6c0bd911607682d55087b9c8e8"},
-    {file = "taichi-0.8.11-cp39-cp39-win_amd64.whl", hash = "sha256:7bb01fe9ce52c6f4376b3e8b52df7a0507ba82fe97101ebf1930b33f6134aac3"},
 ]
 tensorboard = [
     {file = "tensorboard-2.8.0-py3-none-any.whl", hash = "sha256:65a338e4424e9079f2604923bdbe301792adce2ace1be68da6b3ddf005170def"},
@@ -1957,12 +1882,15 @@ tensorflow-io-gcs-filesystem = [
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp310-cp310-win_amd64.whl", hash = "sha256:2f67d19a2f2579dc55f1590faf48c2e882cabb860992b5a9c7edb0ed8b3eb187"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:cde835e68b2b43ddade07c999e7c3251bcd62b1ff165c34fbe9fc6e0f12c3ac9"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:71c00638c9b6048480095f2738dfefd8f4b2e7b534190c91d699aee769bfa86e"},
+    {file = "tensorflow_io_gcs_filesystem-0.24.0-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f63d70d7fce10c63f21bdd8e72244958afc0c495966831a547f038543c9633f7"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp37-cp37m-win_amd64.whl", hash = "sha256:d1eb5e9be62040c5a249ae8adaae7e61f65b59541139e4d6767157f25a224bf5"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:cc093f160f79526d31f6070a3ddc000868d737a36ccf40984128661563383601"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:6e65009770a05a3b55c5f782348f785e5034d277a727832811ad737bd857c8c9"},
+    {file = "tensorflow_io_gcs_filesystem-0.24.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:658764aaaf9419ddefb3daa95bdc84e5210c691ff73b8ac2606d5c839040206b"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp38-cp38-win_amd64.whl", hash = "sha256:aa90b9a34ea8da4dbd534f77746d67375714db869524da889193c3042352679a"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:825f396388748038ad38c35b091311982081f93a5db8ca9763fc874c3f555e6c"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:cbc71b3925508bf796644a0083a6f9284f71404654f53092bece701383a69520"},
+    {file = "tensorflow_io_gcs_filesystem-0.24.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ae96b20b973b1c3bbf2c068409035ead45177447ef51701f4e726f67cadc4695"},
     {file = "tensorflow_io_gcs_filesystem-0.24.0-cp39-cp39-win_amd64.whl", hash = "sha256:2862e0869453ce1f872a28d1362768ee078ec227ea587dd69164081dea6d7177"},
 ]
 termcolor = [
