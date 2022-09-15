@@ -39,7 +39,7 @@ class GeneralizedCellularAutomaton:
                 neighbors_sum += self.space[offset_i+x, offset_j+y, offset_k+z] * self.kernel[x, y, z]
 
             # print(neighbors_sum)
-            self.space[i, j, k] = self.rule(self.space[i, j, k], int(neighbors_sum))
+            self.space[i, j, k] = self.rule(self.space[i, j, k], neighbors_sum)
 
         # new_ca = zeros_like(self.ca)
         # for i in range(1, N - 1):
